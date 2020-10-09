@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
+import { BlogPostReducer } from "../reducers/BlogPostReducer";
 
 const BlogContext = React.createContext();
 
 export const BlogProvider = ({ children }) => {
-  const [blogPosts, setBlogPosts] = useState([]);
+  const [blogPosts, dispatch] = useReducer(BlogPostReducer, []);
 
   const addBlogPost = () => {
-    setBlogPosts([
-      ...blogPosts,
-      { title: `Blog Post #${blogPosts.length + 1}` },
-    ]);
+    dispatch({ type: "add_blogpost", payload: 1 });
   };
 
   return (
