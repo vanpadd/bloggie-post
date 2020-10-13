@@ -5,7 +5,8 @@ export const BlogPostReducer = (state, action) => {
         ...state,
         {
           id: Math.floor(Math.random() * 99999),
-          title: `Blog Post #${state.length + action.payload}`,
+          title: action.payload.title,
+          content: action.payload.content,
         },
       ];
     case "delete_blogpost":

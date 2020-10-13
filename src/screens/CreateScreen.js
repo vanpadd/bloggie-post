@@ -5,6 +5,7 @@ import { Context } from "../context/BlogContext";
 const CreateScreen = ({ navigation }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const { addBlogPost } = useContext(Context);
 
   return (
     <View>
@@ -18,18 +19,28 @@ const CreateScreen = ({ navigation }) => {
       ></TextInput>
       <Text style={styles.text}>Enter Content:</Text>
       <TextInput
+        autoCapitalize="none"
+        autoCorrect={false}
         style={styles.input}
         value={content}
         onChangeText={(content) => setContent(content)}
       ></TextInput>
-      <Button title="Add Blog Post"></Button>
+      <Button
+        title="Add Blog Post"
+        onPress={() => {
+          addBlogPost(title, content, () => {
+            navigation.navigate("Index");
+          });
+        }}
+      ></Button>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   input: {
-    fontSize: 24,
+    fontSize: 18,
+    padding: 5,
     borderWidth: 1,
     borderColor: "black",
     marginHorizontal: 10,
@@ -37,6 +48,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
+    fontWeight: "bold",
     marginVertical: 5,
     marginHorizontal: 10,
   },

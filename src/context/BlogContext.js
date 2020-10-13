@@ -3,7 +3,10 @@ import { BlogPostReducer } from "../reducers/BlogPostReducer";
 import createDataContext from "../context/createDataContext";
 
 const addBlogPost = (dispatch) => {
-  return () => dispatch({ type: "add_blogpost", payload: 1 });
+  return (title, content, callback) => {
+    dispatch({ type: "add_blogpost", payload: { title, content } });
+    callback();
+  };
 };
 
 const deleteBlogPost = (dispatch) => {
