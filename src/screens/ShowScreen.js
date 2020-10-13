@@ -9,13 +9,35 @@ const ShowScreen = ({ navigation }) => {
     (blogpost) => blogpost.id === navigation.getParam("id")
   );
 
+  const { title, content } = item;
+
   return (
-    <View>
-      <Text>{item.title}</Text>
+    <View style={styles.view}>
+      <Text style={styles.title}>{title} </Text>
+      <Text style={styles.content}>{content}</Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  view: {
+    borderWidth: 1,
+    borderColor: "black",
+    height: 300,
+    marginTop: 30,
+    margin: 10,
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 50,
+    marginLeft: 20,
+    textDecorationLine: "underline",
+  },
+  content: {
+    fontSize: 20,
+    marginLeft: 20,
+  },
+});
 
 export default ShowScreen;
