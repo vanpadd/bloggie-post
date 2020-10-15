@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import BlogPostForm from "../components/BlogPostForm";
+import { Context } from "../context/BlogContext";
 
-const EditScreen = () => {
+const EditScreen = ({ navigation }) => {
+  const { state } = useContext(Context);
+
+  const blogPost = state.find(
+    (blogPost) => blogPost.id === navigation.getParam("id")
+  );
+
   return (
-    <View>
-      <Text>EditScreen</Text>
-    </View>
+    <BlogPostForm
+      initialValues={{ title: blogPost.title, content: blogPost.content }}
+    />
   );
 };
 
