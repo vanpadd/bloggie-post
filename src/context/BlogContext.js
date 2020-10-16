@@ -5,14 +5,18 @@ import createDataContext from "../context/createDataContext";
 const addBlogPost = (dispatch) => {
   return (title, content, callback) => {
     dispatch({ type: "add_blogpost", payload: { title, content } });
-    callback();
+    if (callback) {
+      callback();
+    }
   };
 };
 
 const editBlogPost = (dispatch) => {
   return (id, title, content, callback) => {
     dispatch({ type: "edit_blogpost", payload: { id, title, content } });
-    callback();
+    if (callback) {
+      callback();
+    }
   };
 };
 
