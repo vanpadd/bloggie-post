@@ -12,7 +12,7 @@ const getBlogPost = (dispatch) => {
 
 const addBlogPost = (dispatch) => {
   return (title, content, callback) => {
-    dispatch({ type: "add_blogpost", payload: { title, content } });
+    jsonServer.post("/blogPosts", { title, content });
     if (callback) {
       callback();
     }
