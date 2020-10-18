@@ -1,6 +1,14 @@
 import React, { useReducer } from "react";
 import { BlogPostReducer } from "../reducers/BlogPostReducer";
 import createDataContext from "../context/createDataContext";
+import jsonServer from "../api/jsonServer";
+
+const getBlogPost = (dispatch) => {
+  return async () => {
+    const response = await jsonServer.get("/blogPosts");
+    dispatch({ type: "get_blogpost", payload: response.data });
+  };
+};
 
 const addBlogPost = (dispatch) => {
   return (title, content, callback) => {
@@ -26,6 +34,6 @@ const deleteBlogPost = (dispatch) => {
 
 export const { Context, Provider } = createDataContext(
   BlogPostReducer,
-  { addBlogPost, editBlogPost, deleteBlogPost },
+  { addBlogPost, editBlogPost, deleteBlogPost, getBlogPost },
   []
 );

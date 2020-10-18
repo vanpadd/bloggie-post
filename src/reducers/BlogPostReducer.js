@@ -1,5 +1,7 @@
 export const BlogPostReducer = (state, action) => {
   switch (action.type) {
+    case "get_blogpost":
+      return action.payload;
     case "add_blogpost":
       return [
         ...state,
