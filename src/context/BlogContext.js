@@ -20,7 +20,8 @@ const addBlogPost = (dispatch) => {
 };
 
 const editBlogPost = (dispatch) => {
-  return (id, title, content, callback) => {
+  return async (id, title, content, callback) => {
+    await jsonServer.put(`/blogPosts/${id}`, { title, content });
     dispatch({ type: "edit_blogpost", payload: { id, title, content } });
     if (callback) {
       callback();
@@ -29,7 +30,10 @@ const editBlogPost = (dispatch) => {
 };
 
 const deleteBlogPost = (dispatch) => {
-  return (id) => dispatch({ type: "delete_blogpost", payload: id });
+  return async (id) => {
+    await jsonServer.delete(`/blogPosts/${id}`);
+    dispatch({ type: "delete_blogpost", payload: id });
+  };
 };
 
 export const { Context, Provider } = createDataContext(
