@@ -30,18 +30,26 @@ const addBlogPost = (dispatch) => {
 
 const editBlogPost = (dispatch) => {
   return async (id, title, content, callback) => {
-    await jsonServer.put(`/blogPosts/${id}`, { title, content });
-    dispatch({ type: "edit_blogpost", payload: { id, title, content } });
-    if (callback) {
-      callback();
+    try {
+      await jsonServer.put(`/blogPosts/${id}`, { title, content });
+      dispatch({ type: "edit_blogpost", payload: { id, title, content } });
+      if (callback) {
+        callback();
+      }
+    } catch (e) {
+      Alert.alert("Server Error! Please try again later.");
     }
   };
 };
 
 const deleteBlogPost = (dispatch) => {
   return async (id) => {
-    await jsonServer.delete(`/blogPosts/${id}`);
-    dispatch({ type: "delete_blogpost", payload: id });
+    try {
+      await jsonServer.delete(`/blogPosts/${id}`);
+      dispatch({ type: "delete_blogpost", payload: id });
+    } catch (e) {
+      Alert.alert("Server Error! Please try again later.");
+    }
   };
 };
 
