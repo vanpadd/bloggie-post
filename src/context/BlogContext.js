@@ -1,20 +1,29 @@
 import React, { useReducer } from "react";
+import { Alert } from "react-native";
 import { BlogPostReducer } from "../reducers/BlogPostReducer";
 import createDataContext from "../context/createDataContext";
 import jsonServer from "../api/jsonServer";
 
 const getBlogPost = (dispatch) => {
   return async () => {
-    const response = await jsonServer.get("/blogPosts");
-    dispatch({ type: "get_blogpost", payload: response.data });
+    try {
+      const response = await jsonServer.get("/blogPosts");
+      dispatch({ type: "get_blogpost", payload: response.data });
+    } catch (e) {
+      Alert.alert("Server Error! Please try again later.");
+    }
   };
 };
 
 const addBlogPost = (dispatch) => {
-  return (title, content, callback) => {
-    jsonServer.post("/blogPosts", { title, content });
-    if (callback) {
-      callback();
+  return async (title, content, callback) => {
+    try {
+      await jsonServer.post("/blogPosts", { title, content });
+      if (callback) {
+        callback();
+      }
+    } catch (e) {
+      Alert.alert("Server Error! Please try again later.");
     }
   };
 };
