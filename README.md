@@ -1,6 +1,6 @@
 # bloggie-post
 
-Bloggie Post is an app built in React Native which allows users to perform operations on blog posts. The app consumes a local rest API using json-server and ngrok as a way to quickly stand up a back-end server.
+Bloggie Post is an app built in react native which allows users to perform operations on blog posts. The app consumes a local rest API using json-server and ngrok as a way to quickly stand up a back-end server.
 
 ### usage
 
